@@ -6,7 +6,17 @@ from simplebit import constants, cx, db, settings
 class RootResource:
     def on_get(self, request, response):
         response.status = falcon.HTTP_200
-        response.media = {'app': 'simplebit'}
+        asset_hash = '{asset_hash}'
+        field_name = '{field_name}'
+        response.media = {
+            'app': 'simplebit',
+            'repo': 'https://github.com/TunedMystic/simplebit',
+            'endpoints': {
+                'search_assets': f'{settings.ROOT_URL}/assets/',
+                'asset_detail': f'{settings.ROOT_URL}/assets/{asset_hash}',
+                'asset_detail_field': f'{settings.ROOT_URL}/assets/{asset_hash}/{field_name}',
+            },
+        }
 
 
 class AssetListResource:
